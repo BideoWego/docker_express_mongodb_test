@@ -1,31 +1,37 @@
-const repl = require('repl').start({});
-const lodash = require('lodash');
-const helpers = require('./helpers');
+(async () => {
+  const mongo = require('./mongo');
+  await mongo();
+  const repl = require('repl').start({});
+  const lodash = require('lodash');
+  const helpers = require('./helpers');
+  const models = require('./models');
 
+  const add = (name, object, unpack) => {
+    repl.context[name] = object;
+    if (unpack) {
+      Object.keys(object).forEach(key => {
+        repl.context[key] = object[key];
+      });
+    }
+  };
 
+  // ----------------------------------------
+  // Libs
+  // ----------------------------------------
+  add('lodash', lodash);
 
+  // ----------------------------------------
+  // Helpers
+  // ----------------------------------------
+  add('helpers', helpers, true);
 
-// ----------------------------------------
-// Libs
-// ----------------------------------------
-repl.context.lodash = lodash;
+  // ------------------------------------
+  // Models
+  // ------------------------------------
+  add('models', models, true);
 
-
-
-// ----------------------------------------
-// Helpers
-// ----------------------------------------
-repl.context.helpers = helpers;
-Object.keys(helpers).forEach(key => {
-  repl.context[key] = helpers[key];
-});
-
-
-// ----------------------------------------
-// Logging
-// ----------------------------------------
-repl.context.lg = console.log;
-
-
-
-
+  // ----------------------------------------
+  // Logging
+  // ----------------------------------------
+  add('lg', console.log);
+})();

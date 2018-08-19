@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "docker-compose up",
-    "watch": "nodemon --exec 'docker-compose restart web'"
+    "watch": "nodemon --exec 'docker-compose restart web'",
+    "console": "docker-compose run web npm run c",
+    "c": "npm run console"
   },
   "author": "",
   "license": "ISC"
