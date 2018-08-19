@@ -1,0 +1,13 @@
+{
+  "name": "docker_express_mongodb_test",
+  "version": "1.0.0",
+  "description": "Just a test project using Docker, Express.js and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "docker-compose up",
+    "watch": "nodemon --exec 'docker-compose restart web'"
+  },
+  "author": "",
+  "license": "ISC"
+}
